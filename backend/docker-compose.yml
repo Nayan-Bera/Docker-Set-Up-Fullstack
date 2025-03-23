@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+    # Node.js backend service
+    syd-backend:
+        build: .
+        ports:
+            - '8000:8000'
+        container_name: express-container
+        volumes:
+        - .:/usr/src/app
+        - /usr/src/app/node_modules
+
+        depends_on:
+            - db
+        networks:
+            - backend-network
+        environment:
+            PORT: 8000
+            ORIGIN_FRONTEND: http://localhost:5173
+            SALT: 10
+            ACCESS_SECRET: '$2a$12$751rI4BuymmdfPjPam0sVun749j7XfwgQyDqFL57YQWwBBFRzJkNS'
+            REFRESH_SECRET: '$2a$12$751rI4BuymmdfPjPam0sVun749j7XfwgQyDqFL57YQWwBBFRzJkNS'
+            SMTP_HOST: smtp.gmail.com
+            SMTP_PORT: 465
+            SMTP_SRC: false
+            SMTP_MAIL: iweb.dev.mi04@gmail.com
+            SMTP_PASSWORD: 'jnyn eukb vpad kiex'
+            PG_DB_URL: postgresql://postgres:123456@db:5432/postgres
+            CLOUDINARY_NAME: dprkgukne
+            CLOUDINARY_APIKEY: 465111548837324
+            CLOUDINARY_APISECRET: CleMlprYhuSk8EeM6e0FC5fKgBY
+            
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 123456
+            POSTGRES_DB: postgres
+        ports:
+            - '5432:5432'
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        networks:
+            - backend-network
+
+    adminer:
+        image: adminer:latest
+        ports:
+            - '8080:8080' # Access Adminer at http://localhost:8080
+        networks:
+            - backend-network
+
+# Volumes to persist PostgreSQL data
+volumes:
+    postgres-data:
+
+# Networks to allow communication between containers
+networks:
+    backend-network:
+        driver: bridge

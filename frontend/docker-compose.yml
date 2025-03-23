@@ -1,0 +1,31 @@
+
+services:
+    # Node.js backend service
+    syd-frontend:
+        build: .
+        ports:
+            - '5173:5173'
+        container_name: React-container
+        volumes:
+        - .:/usr/src/app 
+        - /usr/src/app/node_modules
+
+        
+        networks:
+            - frontend-network
+        environment:
+         API_BASE_URL: "http://localhost:8000/api"
+         REACT_APP_NOMINATIM_BASE_URL: https://nominatim.openstreetmap.org/search?
+         REACT_APP_MAPTILER_KEY: qyHiwNcixquRs3obN6fC
+         CLOUDINARY_LINK : "https://api.cloudinary.com/v1_1/dprkgukne/image/upload"
+         CLOUDINARY_NAME: "dprkgukne"
+         CLOUDINARY_API_KEY: "465111548837324"
+         CLOUDINARY_API_SECRET: "CleMlprYhuSk8EeM6e0FC5fKgBY"
+         CLOUDINARY_PRESET: "search_dream"
+   
+            
+
+# Networks to allow communication between containers
+networks:
+    frontend-network:
+        driver: bridge
