@@ -16,12 +16,12 @@ services:
         environment:
          API_BASE_URL: "http://localhost:8000/api"
          REACT_APP_NOMINATIM_BASE_URL: https://nominatim.openstreetmap.org/search?
-         REACT_APP_MAPTILER_KEY: qyHiwNcixquRs3obN6fC
-         CLOUDINARY_LINK : "https://api.cloudinary.com/v1_1/dprkgukne/image/upload"
-         CLOUDINARY_NAME: "dprkgukne"
-         CLOUDINARY_API_KEY: "465111548837324"
-         CLOUDINARY_API_SECRET: "CleMlprYhuSk8EeM6e0FC5fKgBY"
-         CLOUDINARY_PRESET: "search_dream"
+         REACT_APP_MAPTILER_KEY: 
+         CLOUDINARY_LINK : 
+         CLOUDINARY_NAME: 
+         CLOUDINARY_API_KEY: 
+         CLOUDINARY_API_SECRET: 
+         CLOUDINARY_PRESET: 
    
             
 
